@@ -4,12 +4,13 @@ class Game
 
 	def initialize(max, player)
 		@max = max
-		@answer = rand(@max)
 		@player = player
 	end
 	
 	
 	def play
+		answer = rand(@max)
+		last = nil
 		puts "Please guess a number between 1 and #{@max}"
 		guess = @player.get_guess(@max)
 		until	guess == @answer
@@ -17,8 +18,10 @@ class Game
 			sleep 0.25
 			if guess > @answer
 				puts "Too high, try again: "
+				last = :high
 			else
 				puts "Too low, try again: "
+				last = :low
 			end
 			guess = @player.get_guess(@max)
 		end
